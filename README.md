@@ -36,6 +36,9 @@
   <a href="https://github.com/AMR-Autonomy-and-Research-Lab/amr1-tec-core/actions/workflows/pcb-bom-check.yml">
     <img src="https://github.com/AMR-Autonomy-and-Research-Lab/amr1-tec-core/actions/workflows/pcb-bom-check.yml/badge.svg" alt="BOM Check" />
   </a>
+  <a href="https://github.com/AMR-Autonomy-and-Research-Lab/amr1-tec-core/actions/workflows/3d-validation.yml">
+    <img src="https://github.com/AMR-Autonomy-and-Research-Lab/amr1-tec-core/actions/workflows/3d-validation.yml/badge.svg" alt="3D Validation" />
+  </a>
   <a href="https://github.com/AMR-Autonomy-and-Research-Lab/amr1-tec-core">
     <img src="https://img.shields.io/github/last-commit/AMR-Autonomy-and-Research-Lab/amr1-tec-core?style=flat-square" alt="Last Commit" />
   </a>

@@ -32,3 +32,17 @@ jobs:
           GERBER_COUNT=$(ls -1 PCB_Design/PCB_AMR_Gerber/*.G* PCB_Design/PCB_AMR_Gerber/*.DRL 2>/dev/null | wc -l)
           echo "Gerber/Drill files found: $GERBER_COUNT"
           test $GERBER_COUNT -ge 5 || exit 1
+
+      - name: Check 3D base (Diseño_CAJA)
+        run: |
+          CAJA=$(find . -maxdepth 2 -type d -name "*CAJA*" 2>/dev/null | head -1)
+          if [ -z "$CAJA" ]; then
+            echo "❌ Diseño_CAJA folder not found"
+            exit 1
+          fi
+          STL_COUNT=$(find "$CAJA" -name "*.STL" -o -name "*.stl" 2>/dev/null | wc -l)
+          if [ "$STL_COUNT" -lt 1 ]; then
+            echo "❌ No STL files in Diseño_CAJA"
+            exit 1
+          fi
+          echo "✅ Diseño_CAJA: $STL_COUNT STL file(s) (base para PCB)"

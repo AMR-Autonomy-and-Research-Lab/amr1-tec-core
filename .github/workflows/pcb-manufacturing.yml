@@ -5,14 +5,8 @@ name: PCB Manufacturing Check
 on:
   push:
     branches: [main, develop]
-    paths:
-      - 'PCB_Design/**'
-      - '.github/workflows/pcb-manufacturing.yml'
   pull_request:
     branches: [main, develop]
-    paths:
-      - 'PCB_Design/**'
-      - '.github/workflows/pcb-manufacturing.yml'
   workflow_dispatch:
 
 jobs:

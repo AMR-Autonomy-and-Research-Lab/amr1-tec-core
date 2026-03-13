@@ -1,0 +1,55 @@
+# 3D Validation — Diseño_CAJA / Base para PCB
+# Valida modelos STL para carcasa, base de montaje y piezas 3D del AMR
+name: 3D Validation
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+  workflow_dispatch:
+
+jobs:
+  validate-3d:
+    name: Validate 3D Models (Diseño_CAJA)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check Diseño_CAJA folder (base para PCB)
+        run: |
+          echo "## 🎨 3D Models — Diseño_CAJA"
+          echo ""
+          CAJA=$(find . -maxdepth 1 -type d -iname "*caja*" 2>/dev/null | head -1)
+          if [ -n "$CAJA" ]; then
+            echo "✅ Carpeta encontrada: $CAJA (base para montaje PCB)"
+          else
+            echo "❌ Carpeta Diseño_CAJA no encontrada"
+            exit 1
+          fi
+
+      - name: Check STL files (base para montaje PCB)
+        run: |
+          echo "### Archivos STL"
+          STL_COUNT=0
+          while IFS= read -r f; do
+            if [ -f "$f" ]; then
+              SIZE=$(stat -c%s "$f" 2>/dev/null)
+              echo "✅ $f ($(numfmt --to=iec $SIZE 2>/dev/null || echo "${SIZE} bytes"))"
+              STL_COUNT=$((STL_COUNT + 1))
+            fi
+          done < <(find . -maxdepth 2 \( -name "*.stl" -o -name "*.STL" \) 2>/dev/null)
+          if [ $STL_COUNT -eq 0 ]; then
+            echo "❌ No se encontraron archivos STL en Diseño_CAJA o 3D_Models"
+            exit 1
+          fi
+          echo ""
+          echo "Total: $STL_COUNT archivo(s) STL"
+
+      - name: Validate CajaNuevaAMRF2.STL (carcasa principal)
+        run: |
+          if find . -maxdepth 2 -iname "CajaNuevaAMRF2.STL" 2>/dev/null | grep -q .; then
+            echo "✅ CajaNuevaAMRF2.STL — carcasa/base para PCB encontrada"
+          else
+            echo "⚠️ CajaNuevaAMRF2.STL no encontrada (opcional si hay otros STL)"
+          fi

@@ -5,14 +5,8 @@ name: PCB Validation
 on:
   push:
     branches: [main, develop]
-    paths:
-      - 'PCB_Design/**'
-      - '.github/workflows/pcb-validation.yml'
   pull_request:
     branches: [main, develop]
-    paths:
-      - 'PCB_Design/**'
-      - '.github/workflows/pcb-validation.yml'
   workflow_dispatch:
 
 jobs:
