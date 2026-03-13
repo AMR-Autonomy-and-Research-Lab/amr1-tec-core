@@ -31,18 +31,19 @@ def main():
     verts = mesh.vertices
     faces = mesh.faces
 
-    fig = plt.figure(figsize=(8, 6))
+    fig = plt.figure(figsize=(10, 8))
     ax = fig.add_subplot(111, projection="3d")
     ax.plot_trisurf(
         verts[:, 0], verts[:, 1], verts[:, 2],
-        triangles=faces, color="#5588FF", alpha=0.9, shade=True
+        triangles=faces, color="#4a7ac4", alpha=0.95, shade=True, edgecolor="none"
     )
     ax.set_axis_off()
-    ax.view_init(elev=20, azim=45)
-    plt.tight_layout(pad=0)
+    ax.set_facecolor("#f8f9fa")
+    ax.view_init(elev=25, azim=55)
+    plt.subplots_adjust(left=0, right=1, top=1, bottom=0)
     os.makedirs("docs", exist_ok=True)
     out = "docs/caja_preview.png"
-    plt.savefig(out, bbox_inches="tight", pad_inches=0.1, dpi=120)
+    plt.savefig(out, bbox_inches="tight", pad_inches=0.15, dpi=150, facecolor="#f8f9fa")
     plt.close()
     print(f"Saved {out}")
 

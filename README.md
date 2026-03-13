@@ -198,14 +198,23 @@ La carpeta `Diseño_CAJA/` contiene la base/carcasa para montaje de PCB y modelo
 </p>
 
 <p align="center">
-  <img src="docs/caja_preview.png" alt="Carcasa AMR - CajaNuevaAMRF2" width="500" />
+  <img src="docs/caja_preview.png" alt="Carcasa AMR - CajaNuevaAMRF2" width="520" />
 </p>
 
 <p align="center">
-  <a href="https://github.com/AMR-Autonomy-and-Research-Lab/amr1-tec-core/blob/main/Dise%C3%B1o_CAJA/CajaNuevaAMRF2.STL">
-    📥 Descargar STL
+  <a href="https://htmlpreview.github.io/?https://raw.githubusercontent.com/AMR-Autonomy-and-Research-Lab/amr1-tec-core/main/docs/caja_viewer.html">
+    <img src="https://img.shields.io/badge/🔄_Abrir_visor_3D_interactivo-Rotar_·_Zoom_·_Acercar-5588FF?style=for-the-badge" alt="Abrir visor 3D" />
   </a>
 </p>
+
+<p align="center">
+  <small>Arrastra para rotar · Scroll para zoom in/out · Clic derecho para pan</small>
+</p>
+
+<p align="center">
+  <a href="https://github.com/AMR-Autonomy-and-Research-Lab/amr1-tec-core/blob/main/Dise%C3%B1o_CAJA/CajaNuevaAMRF2.STL">📥 Descargar STL</a>
+</p>
+
 
 Compatible con:
 - Cura, PrusaSlicer, Simplify3D
