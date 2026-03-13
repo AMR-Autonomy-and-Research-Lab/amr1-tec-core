@@ -16,7 +16,7 @@ jobs:
       - name: Set up Arduino CLI
         uses: arduino/setup-arduino-cli@v2
         with:
-          version: latest
+          version: '0.35.0'
 
       - name: Install board (RP2040 - Adafruit Feather CAN)
         run: |
@@ -44,7 +44,7 @@ jobs:
       - name: Set up Arduino CLI
         uses: arduino/setup-arduino-cli@v2
         with:
-          version: latest
+          version: '0.35.0'
 
       - name: Install board (RP2040 - Adafruit Feather CAN)
         run: |

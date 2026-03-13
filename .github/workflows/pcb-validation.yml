@@ -1,0 +1,114 @@
+# PCB Validation — EasyEDA / Gerber
+# Valida estructura de archivos Gerber, JSON y preparación para manufactura
+name: PCB Validation
+
+on:
+  push:
+    branches: [main, develop]
+    paths:
+      - 'PCB_Design/**'
+      - '.github/workflows/pcb-validation.yml'
+  pull_request:
+    branches: [main, develop]
+    paths:
+      - 'PCB_Design/**'
+      - '.github/workflows/pcb-validation.yml'
+  workflow_dispatch:
+
+jobs:
+  gerber-structure:
+    name: Gerber Structure Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check required Gerber layers
+        run: |
+          GERBER_DIR="PCB_Design/PCB_AMR_Gerber"
+          REQUIRED_LAYERS=(
+            "Gerber_TopLayer.GTL"
+            "Gerber_BottomLayer.GBL"
+            "Gerber_TopSilkscreenLayer.GTO"
+            "Gerber_BottomSilkscreenLayer.GBO"
+            "Gerber_TopSolderMaskLayer.GTS"
+            "Gerber_BottomSolderMaskLayer.GBS"
+            "Gerber_BoardOutlineLayer.GKO"
+          )
+          for layer in "${REQUIRED_LAYERS[@]}"; do
+            if [ ! -f "$GERBER_DIR/$layer" ]; then
+              echo "❌ Missing required layer: $layer"
+              exit 1
+            fi
+            echo "✅ $layer"
+          done
+
+      - name: Check drill files
+        run: |
+          GERBER_DIR="PCB_Design/PCB_AMR_Gerber"
+          DRILL_FILES=$(ls -1 "$GERBER_DIR"/*.DRL 2>/dev/null | wc -l)
+          echo "Drill files: $DRILL_FILES"
+          if [ "$DRILL_FILES" -lt 1 ]; then
+            echo "❌ No drill files found"
+            exit 1
+          fi
+          echo "✅ Drill files OK"
+
+      - name: Check non-empty files
+        run: |
+          for f in PCB_Design/PCB_AMR_Gerber/*.G* PCB_Design/PCB_AMR_Gerber/*.DRL; do
+            if [ -f "$f" ] && [ ! -s "$f" ]; then
+              echo "❌ Empty file: $f"
+              exit 1
+            fi
+          done
+          echo "✅ All Gerber/Drill files have content"
+
+  easyeda-json:
+    name: EasyEDA JSON Validation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate schematic JSON
+        run: |
+          if ! python3 -c "
+          import json, sys
+          for f in ['PCB_Design/PCB_AMR_Esquematico.json', 'PCB_Design/PCB_Final.json']:
+            try:
+              with open(f) as fp:
+                json.load(fp)
+              print(f'✅ Valid JSON: {f}')
+            except Exception as e:
+              print(f'❌ Invalid JSON {f}: {e}')
+              sys.exit(1)
+          "; then
+            exit 1
+          fi
+
+      - name: Check JSON structure (EasyEDA schema)
+        run: |
+          python3 << 'EOF'
+          import json
+          with open("PCB_Design/PCB_AMR_Esquematico.json") as f:
+            d = json.load(f)
+          assert "editorVersion" in d or "schematics" in d or "docType" in d, "No EasyEDA schema found"
+          print("✅ EasyEDA schematic structure OK")
+          EOF
+
+  gerber-syntax:
+    name: Gerber Syntax Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Basic Gerber format check
+        run: |
+          for f in PCB_Design/PCB_AMR_Gerber/*.GTL PCB_Design/PCB_AMR_Gerber/*.GBL; do
+            if [ -f "$f" ]; then
+              if ! grep -q '^%FS\|^G04\|^D0' "$f" 2>/dev/null && ! head -1 "$f" | grep -q '%'; then
+                echo "⚠️  $f might not be standard Gerber (no % header)"
+              else
+                echo "✅ $f format OK"
+              fi
+            fi
+          done

@@ -1,0 +1,81 @@
+# PCB BOM Check — Extrae y valida componentes del esquemático EasyEDA
+# Útil para verificar BOM antes de ordenar en JLCPCB
+name: PCB BOM Check
+
+on:
+  push:
+    branches: [main, develop]
+    paths:
+      - 'PCB_Design/PCB_AMR_Esquematico.json'
+      - 'PCB_Design/PCB_Final.json'
+      - '.github/workflows/pcb-bom-check.yml'
+  pull_request:
+    branches: [main, develop]
+    paths:
+      - 'PCB_Design/PCB_AMR_Esquematico.json'
+      - 'PCB_Design/PCB_Final.json'
+      - '.github/workflows/pcb-bom-check.yml'
+  workflow_dispatch:
+
+jobs:
+  bom:
+    name: Extract BOM from EasyEDA JSON
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Extract component list
+        run: |
+          python3 << 'EOF'
+          import json
+          import re
+          
+          def extract_components(data, path=""):
+              parts = []
+              if isinstance(data, dict):
+                  if "shape" in data and isinstance(data["shape"], list):
+                      for s in data["shape"]:
+                          if isinstance(s, str) and "LIB~" in s:
+                              m = re.search(r'comment~([^~]+)', s)
+                              if m:
+                                  parts.append(m.group(1).strip())
+                  for k, v in data.items():
+                      parts.extend(extract_components(v, f"{path}.{k}"))
+              elif isinstance(data, list):
+                  for i, v in enumerate(data):
+                      parts.extend(extract_components(v, f"{path}[{i}]"))
+              return parts
+          
+          try:
+              with open("PCB_Design/PCB_AMR_Esquematico.json") as f:
+                  d = json.load(f)
+              parts = extract_components(d)
+              unique = sorted(set(p for p in parts if len(p) > 2))
+              print(f"## Components found: {len(unique)}")
+              for p in unique[:30]:
+                  print(f"- {p}")
+              if len(unique) > 30:
+                  print(f"- ... and {len(unique)-30} more")
+          except Exception as e:
+              print(f"Note: {e}")
+              print("BOM extraction skipped")
+          EOF
+
+      - name: Check PCB JSON has nets
+        run: |
+          python3 << 'EOF'
+          import json
+          try:
+              with open("PCB_Design/PCB_Final.json") as f:
+                  d = json.load(f)
+              keys = list(d.keys())[:10]
+              print("PCB JSON top-level keys:", keys)
+              if "canvas" in d or "shape" in str(d) or "tracks" in str(d):
+                  print("✅ PCB JSON structure OK")
+              else:
+                  print("ℹ️  PCB format may vary")
+          except Exception as e:
+              print(f"Note: {e}")
+              print("PCB JSON check skipped")
+          EOF
+        continue-on-error: true

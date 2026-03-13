@@ -1,0 +1,77 @@
+# PCB EasyEDA JSON Lint — Valida estructura de archivos exportados desde EasyEDA
+name: PCB EasyEDA Lint
+
+on:
+  push:
+    branches: [main, develop]
+    paths:
+      - 'PCB_Design/**/*.json'
+  pull_request:
+    branches: [main, develop]
+    paths:
+      - 'PCB_Design/**/*.json'
+  workflow_dispatch:
+
+jobs:
+  lint-easyeda:
+    name: Validate EasyEDA JSON
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Validate PCB JSON structure
+        run: |
+          echo "## 📋 EasyEDA JSON Validation" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          ERRORS=0
+
+          # PCB_Final.json — pistas y conexiones
+          if [ -f "PCB_Design/PCB_Final.json" ]; then
+            if jq empty PCB_Design/PCB_Final.json 2>/dev/null; then
+              SIZE=$(wc -c < PCB_Design/PCB_Final.json)
+              echo "✅ PCB_Final.json — válido ($(($SIZE/1024))KB)" >> $GITHUB_STEP_SUMMARY
+            else
+              echo "❌ PCB_Final.json — JSON inválido" >> $GITHUB_STEP_SUMMARY
+              ERRORS=$((ERRORS+1))
+            fi
+          else
+            echo "⚠️ PCB_Final.json — no encontrado" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          # PCB_AMR_Esquematico.json — esquemático
+          if [ -f "PCB_Design/PCB_AMR_Esquematico.json" ]; then
+            if jq empty PCB_Design/PCB_AMR_Esquematico.json 2>/dev/null; then
+              SCHEMA=$(jq -r '.title // .docType // "OK"' PCB_Design/PCB_AMR_Esquematico.json 2>/dev/null)
+              echo "✅ PCB_AMR_Esquematico.json — válido ($SCHEMA)" >> $GITHUB_STEP_SUMMARY
+            else
+              echo "❌ PCB_AMR_Esquematico.json — JSON inválido" >> $GITHUB_STEP_SUMMARY
+              ERRORS=$((ERRORS+1))
+            fi
+          else
+            echo "⚠️ PCB_AMR_Esquematico.json — no encontrado" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          # PCB_Actualizada_AMR.json (opcional)
+          if [ -f "PCB_Design/PCB_Actualizada_AMR.json" ]; then
+            if jq empty PCB_Design/PCB_Actualizada_AMR.json 2>/dev/null; then
+              echo "✅ PCB_Actualizada_AMR.json — válido" >> $GITHUB_STEP_SUMMARY
+            else
+              echo "❌ PCB_Actualizada_AMR.json — JSON inválido" >> $GITHUB_STEP_SUMMARY
+              ERRORS=$((ERRORS+1))
+            fi
+          fi
+
+          if [ $ERRORS -gt 0 ]; then
+            echo ""
+            echo "❌ $ERRORS archivo(s) con errores" >> $GITHUB_STEP_SUMMARY
+            exit 1
+          fi
+          echo ""
+          echo "✅ Todos los archivos EasyEDA JSON son válidos" >> $GITHUB_STEP_SUMMARY

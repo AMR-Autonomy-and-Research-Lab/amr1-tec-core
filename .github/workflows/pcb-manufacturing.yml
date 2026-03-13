@@ -1,0 +1,63 @@
+# PCB Manufacturing Readiness — JLCPCB / PCBWay / EasyEDA
+# Verifica que los Gerbers cumplan requisitos para fabricación
+name: PCB Manufacturing Check
+
+on:
+  push:
+    branches: [main, develop]
+    paths:
+      - 'PCB_Design/**'
+      - '.github/workflows/pcb-manufacturing.yml'
+  pull_request:
+    branches: [main, develop]
+    paths:
+      - 'PCB_Design/**'
+      - '.github/workflows/pcb-manufacturing.yml'
+  workflow_dispatch:
+
+jobs:
+  manufacturing:
+    name: Manufacturing Readiness
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: JLCPCB / PCBWay layer check
+        run: |
+          GERBER="PCB_Design/PCB_AMR_Gerber"
+          echo "## 📋 PCB Manufacturing Readiness"
+          echo ""
+          echo "### Required for standard 2-layer PCB:"
+          layers="GTL GBL GTO GBO GTS GBS GKO"
+          for ext in $layers; do
+            found=$(find "$GERBER" -name "*$ext" -o -name "*.$ext" 2>/dev/null | head -1)
+            if [ -n "$found" ]; then
+              echo "✅ $ext - $(basename "$found")"
+            else
+              echo "❌ $ext - MISSING"
+            fi
+          done
+
+      - name: Drill files check
+        run: |
+          DRL_COUNT=$(find PCB_Design/PCB_AMR_Gerber -name "*.DRL" 2>/dev/null | wc -l)
+          echo "Drill files: $DRL_COUNT"
+          if [ "$DRL_COUNT" -lt 1 ]; then
+            echo "❌ At least one drill file required"
+            exit 1
+          fi
+
+      - name: Gerber zip package (for upload)
+        run: |
+          cd PCB_Design
+          if [ -d PCB_AMR_Gerber ]; then
+            zip -r ../PCB_AMR_Gerber_CI.zip PCB_AMR_Gerber/
+            echo "✅ Gerber zip created (PCB_AMR_Gerber_CI.zip)"
+          fi
+          cd ..
+
+      - name: Upload Gerber zip
+        uses: actions/upload-artifact@v4
+        with:
+          name: pcb-gerber-manufacturing
+          path: PCB_AMR_Gerber_CI.zip

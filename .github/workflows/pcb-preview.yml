@@ -1,0 +1,62 @@
+# PCB Preview — Genera visualizaciones SVG desde Gerbers
+# Usa tracespace para renderizar capas y subir como artifact
+name: PCB Preview
+
+on:
+  push:
+    branches: [main, develop]
+    paths:
+      - 'PCB_Design/PCB_AMR_Gerber/**'
+      - '.github/workflows/pcb-preview.yml'
+  pull_request:
+    branches: [main, develop]
+    paths:
+      - 'PCB_Design/PCB_AMR_Gerber/**'
+      - '.github/workflows/pcb-preview.yml'
+  workflow_dispatch:
+
+jobs:
+  render:
+    name: Render PCB to SVG
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install tracespace
+        run: npm install -g @tracespace/cli
+
+      - name: Create output directory
+        run: mkdir -p pcb-preview-output
+
+      - name: Render Gerbers to SVG
+        run: |
+          npx @tracespace/cli \
+            PCB_Design/PCB_AMR_Gerber/Gerber_TopLayer.GTL \
+            PCB_Design/PCB_AMR_Gerber/Gerber_BottomLayer.GBL \
+            PCB_Design/PCB_AMR_Gerber/Gerber_BoardOutlineLayer.GKO \
+            PCB_Design/PCB_AMR_Gerber/Gerber_TopSilkscreenLayer.GTO \
+            PCB_Design/PCB_AMR_Gerber/Gerber_BottomSilkscreenLayer.GBO \
+            PCB_Design/PCB_AMR_Gerber/Gerber_TopSolderMaskLayer.GTS \
+            PCB_Design/PCB_AMR_Gerber/Gerber_BottomSolderMaskLayer.GBS \
+            PCB_Design/PCB_AMR_Gerber/Drill_PTH_Through.DRL \
+            PCB_Design/PCB_AMR_Gerber/Drill_PTH_Through_Via.DRL \
+            PCB_Design/PCB_AMR_Gerber/Drill_NPTH_Through.DRL \
+            -o pcb-preview-output/ -f -q
+        continue-on-error: true
+
+      - name: List generated files
+        run: |
+          ls -la pcb-preview-output/ 2>/dev/null || echo "No SVGs generated (tracespace may need different input)"
+
+      - name: Upload PCB preview
+        uses: actions/upload-artifact@v4
+        with:
+          name: pcb-preview-svg
+          path: pcb-preview-output/
+          if-no-files-found: ignore

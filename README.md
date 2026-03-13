@@ -21,6 +21,21 @@
   <a href="https://github.com/AMR-Autonomy-and-Research-Lab/amr1-tec-core/actions">
     <img src="https://github.com/AMR-Autonomy-and-Research-Lab/amr1-tec-core/actions/workflows/arduino-build.yml/badge.svg" alt="Arduino Build" />
   </a>
+  <a href="https://github.com/AMR-Autonomy-and-Research-Lab/amr1-tec-core/actions/workflows/pcb-validation.yml">
+    <img src="https://github.com/AMR-Autonomy-and-Research-Lab/amr1-tec-core/actions/workflows/pcb-validation.yml/badge.svg" alt="PCB Validation" />
+  </a>
+  <a href="https://github.com/AMR-Autonomy-and-Research-Lab/amr1-tec-core/actions/workflows/pcb-manufacturing.yml">
+    <img src="https://github.com/AMR-Autonomy-and-Research-Lab/amr1-tec-core/actions/workflows/pcb-manufacturing.yml/badge.svg" alt="Manufacturing Ready" />
+  </a>
+  <a href="https://github.com/AMR-Autonomy-and-Research-Lab/amr1-tec-core/actions/workflows/pcb-easyeda-lint.yml">
+    <img src="https://github.com/AMR-Autonomy-and-Research-Lab/amr1-tec-core/actions/workflows/pcb-easyeda-lint.yml/badge.svg" alt="EasyEDA Lint" />
+  </a>
+  <a href="https://github.com/AMR-Autonomy-and-Research-Lab/amr1-tec-core/actions/workflows/pcb-preview.yml">
+    <img src="https://github.com/AMR-Autonomy-and-Research-Lab/amr1-tec-core/actions/workflows/pcb-preview.yml/badge.svg" alt="PCB Preview" />
+  </a>
+  <a href="https://github.com/AMR-Autonomy-and-Research-Lab/amr1-tec-core/actions/workflows/pcb-bom-check.yml">
+    <img src="https://github.com/AMR-Autonomy-and-Research-Lab/amr1-tec-core/actions/workflows/pcb-bom-check.yml/badge.svg" alt="BOM Check" />
+  </a>
   <a href="https://github.com/AMR-Autonomy-and-Research-Lab/amr1-tec-core">
     <img src="https://img.shields.io/github/last-commit/AMR-Autonomy-and-Research-Lab/amr1-tec-core?style=flat-square" alt="Last Commit" />
   </a>
@@ -171,6 +186,19 @@ La carpeta `3D/` contiene modelos STL para impresión 3D:
 Compatible con:
 - Cura, PrusaSlicer, Simplify3D
 - Impresoras FDM estándar
+
+---
+
+## ⚙️ CI/CD — GitHub Actions
+
+| Workflow | Descripción |
+|----------|-------------|
+| **Arduino Build** | Compila `feather_can_tx` y `feather_can_rx` para Adafruit Feather RP2040 CAN |
+| **PCB Validation** | Verifica estructura de Gerbers, JSON EasyEDA, tamaños de archivo |
+| **PCB Manufacturing** | Comprueba capas necesarias para JLCPCB/PCBWay |
+| **PCB EasyEDA Lint** | Valida esquemático y PCB JSON exportados de EasyEDA |
+| **PCB Preview** | Genera SVGs desde Gerbers (tracespace) y sube como artifact |
+| **PCB BOM Check** | Extrae componentes del esquemático para revisión de BOM |
 
 ---
 
