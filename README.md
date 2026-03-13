@@ -164,6 +164,11 @@ M 100 1 0 0 0   # Motor: vel, enable, reverse, lo, hi
 | `PCB_Final.json`        | Pistas y conexiones               |
 | `PCB_AMR_Gerber/`       | Gerbers listos para fabricación   |
 
+### Vista previa PCB
+
+- **SVG/Preview:** Descarga el artifact `pcb-preview-svg` del workflow [PCB Preview](https://github.com/AMR-Autonomy-and-Research-Lab/amr1-tec-core/actions/workflows/pcb-preview.yml) en Actions
+- **Vista 3D del PCB:** Exporta desde EasyEDA (File → Exportar → 3D Model) y sube el `.obj` o `.stl` para visualizarlo aquí
+
 ### Cómo fabricar la placa
 
 1. Abre [EasyEDA PCB Order](https://docs.easyeda.com/en/PCB/Order-PCB)
@@ -180,11 +185,27 @@ Los archivos Gerber incluyen:
 
 ## 🎨 Modelos 3D
 
-La carpeta `3D/` contiene modelos STL para impresión 3D:
+La carpeta `Diseño_CAJA/` contiene la base/carcasa para montaje de PCB y modelos STL para impresión 3D:
 
-| Archivo             | Descripción              |
-|---------------------|--------------------------|
-| `CajaNuevaAMRF2.STL`| Carcasa principal AMR    |
+| Archivo             | Descripción                        |
+|---------------------|------------------------------------|
+| `CajaNuevaAMRF2.STL`| Carcasa principal AMR (base para PCB) |
+
+### Vista 3D — Carcasa (Diseño_CAJA)
+
+<p align="center">
+  <strong>CajaNuevaAMRF2</strong> · Base para montaje de PCB
+</p>
+<p align="center">
+  <a href="https://github.com/AMR-Autonomy-and-Research-Lab/amr1-tec-core/blob/main/Dise%C3%B1o_CAJA/CajaNuevaAMRF2.STL">
+    <img src="https://img.shields.io/badge/Ver_STL_en_3D-5588FF?style=for-the-badge" alt="Ver en 3D" />
+  </a>
+</p>
+<p align="center">
+  <script src="https://embed.github.com/view/3d/AMR-Autonomy-and-Research-Lab/amr1-tec-core/main/Dise%C3%B1o_CAJA/CajaNuevaAMRF2.STL?height=350&width=500"></script>
+</p>
+
+> **Nota:** Haz clic en [Ver STL en 3D](https://github.com/AMR-Autonomy-and-Research-Lab/amr1-tec-core/blob/main/Dise%C3%B1o_CAJA/CajaNuevaAMRF2.STL) si el visor no carga (GitHub muestra STL interactivos).
 
 Compatible con:
 - Cura, PrusaSlicer, Simplify3D
