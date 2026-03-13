@@ -19,10 +19,11 @@ jobs:
           version: '0.35.0'
 
       - name: Install board (RP2040 - Adafruit Feather CAN)
+        env:
+          RP2040_URL: https://github.com/earlephilhower/arduino-pico/releases/download/global/package_rp2040_index.json
         run: |
-          arduino-cli config add board_manager.additional_urls https://github.com/earlephilhower/arduino-pico/releases/download/global/package_rp2040_index.json
-          arduino-cli core update-index
-          arduino-cli core install rp2040:rp2040
+          arduino-cli core update-index --additional-urls ${{ env.RP2040_URL }}
+          arduino-cli core install rp2040:rp2040 --additional-urls ${{ env.RP2040_URL }}
 
       - name: Install libraries
         run: |
@@ -47,10 +48,11 @@ jobs:
           version: '0.35.0'
 
       - name: Install board (RP2040 - Adafruit Feather CAN)
+        env:
+          RP2040_URL: https://github.com/earlephilhower/arduino-pico/releases/download/global/package_rp2040_index.json
         run: |
-          arduino-cli config add board_manager.additional_urls https://github.com/earlephilhower/arduino-pico/releases/download/global/package_rp2040_index.json
-          arduino-cli core update-index
-          arduino-cli core install rp2040:rp2040
+          arduino-cli core update-index --additional-urls ${{ env.RP2040_URL }}
+          arduino-cli core install rp2040:rp2040 --additional-urls ${{ env.RP2040_URL }}
 
       - name: Install libraries
         run: |
