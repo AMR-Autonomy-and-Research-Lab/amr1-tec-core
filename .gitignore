@@ -1,0 +1,41 @@
+# IDE & Editors
+.vscode/
+.idea/
+*.sublime-*
+.DS_Store
+Thumbs.db
+
+# Arduino
+*.ino.bak
+build/
+*.hex
+*.elf
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+venv/
+.env
+.venv/
+
+# Build outputs
+*.o
+*.a
+*.so
+*.dylib
+*.exe
+
+# Logs
+*.log
+*.tmp
+*.temp
+
+# OS
+*.swp
+*~
+
+# Backup
+*.bak
+*.backup

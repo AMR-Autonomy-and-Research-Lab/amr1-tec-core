@@ -1,0 +1,64 @@
+name: Arduino Build
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  build-tx:
+    name: Build Feather CAN TX
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Arduino CLI
+        uses: arduino/setup-arduino-cli@v2
+        with:
+          version: latest
+
+      - name: Install board (RP2040 - Adafruit Feather CAN)
+        run: |
+          arduino-cli config add board_manager.additional_urls https://github.com/earlephilhower/arduino-pico/releases/download/global/package_rp2040_index.json
+          arduino-cli core update-index
+          arduino-cli core install rp2040:rp2040
+
+      - name: Install libraries
+        run: |
+          arduino-cli lib install "Adafruit MCP2515"
+          arduino-cli lib install "Adafruit SSD1306"
+          arduino-cli lib install "Adafruit GFX Library"
+          arduino-cli lib install "Adafruit BusIO"
+
+      - name: Build feather_can_tx
+        run: |
+          arduino-cli compile --fqbn rp2040:rp2040:adafruit_feather_rp2040_can feather_can_tx/feather_can_tx.ino
+
+  build-rx:
+    name: Build Feather CAN RX
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Arduino CLI
+        uses: arduino/setup-arduino-cli@v2
+        with:
+          version: latest
+
+      - name: Install board (RP2040 - Adafruit Feather CAN)
+        run: |
+          arduino-cli config add board_manager.additional_urls https://github.com/earlephilhower/arduino-pico/releases/download/global/package_rp2040_index.json
+          arduino-cli core update-index
+          arduino-cli core install rp2040:rp2040
+
+      - name: Install libraries
+        run: |
+          arduino-cli lib install "Adafruit MCP2515"
+          arduino-cli lib install "Adafruit SSD1306"
+          arduino-cli lib install "Adafruit GFX Library"
+          arduino-cli lib install "Adafruit BusIO"
+
+      - name: Build feather_can_rx
+        run: |
+          arduino-cli compile --fqbn rp2040:rp2040:adafruit_feather_rp2040_can feather_can_rx/feather_can_rx.ino

@@ -1,0 +1,34 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  validate:
+    name: Validate Project Structure
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check PCB Design files
+        run: |
+          test -d PCB_Design || exit 1
+          test -f PCB_Design/PCB_Final.json || exit 1
+          test -f PCB_Design/PCB_AMR_Esquematico.json || exit 1
+          test -d PCB_Design/PCB_AMR_Gerber || exit 1
+          echo "✅ PCB design files present"
+
+      - name: Check firmware structure
+        run: |
+          test -f feather_can_tx/feather_can_tx.ino || exit 1
+          test -f feather_can_rx/feather_can_rx.ino || exit 1
+          echo "✅ Firmware files present"
+
+      - name: Check Gerber layer count
+        run: |
+          GERBER_COUNT=$(ls -1 PCB_Design/PCB_AMR_Gerber/*.G* PCB_Design/PCB_AMR_Gerber/*.DRL 2>/dev/null | wc -l)
+          echo "Gerber/Drill files found: $GERBER_COUNT"
+          test $GERBER_COUNT -ge 5 || exit 1
