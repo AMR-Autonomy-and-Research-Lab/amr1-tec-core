@@ -191,21 +191,21 @@ La carpeta `Diseño_CAJA/` contiene la base/carcasa para montaje de PCB y modelo
 |---------------------|------------------------------------|
 | `CajaNuevaAMRF2.STL`| Carcasa principal AMR (base para PCB) |
 
-### Vista 3D — Carcasa (Diseño_CAJA)
+### Vista previa — Carcasa (Diseño_CAJA)
 
 <p align="center">
   <strong>CajaNuevaAMRF2</strong> · Base para montaje de PCB
 </p>
+
 <p align="center">
-  <a href="https://github.com/AMR-Autonomy-and-Research-Lab/amr1-tec-core/blob/main/Dise%C3%B1o_CAJA/CajaNuevaAMRF2.STL">
-    <img src="https://img.shields.io/badge/Ver_STL_en_3D-5588FF?style=for-the-badge" alt="Ver en 3D" />
-  </a>
-</p>
-<p align="center">
-  <script src="https://embed.github.com/view/3d/AMR-Autonomy-and-Research-Lab/amr1-tec-core/main/Dise%C3%B1o_CAJA/CajaNuevaAMRF2.STL?height=350&width=500"></script>
+  <img src="docs/caja_preview.png" alt="Carcasa AMR - CajaNuevaAMRF2" width="500" />
 </p>
 
-> **Nota:** Haz clic en [Ver STL en 3D](https://github.com/AMR-Autonomy-and-Research-Lab/amr1-tec-core/blob/main/Dise%C3%B1o_CAJA/CajaNuevaAMRF2.STL) si el visor no carga (GitHub muestra STL interactivos).
+<p align="center">
+  <a href="https://github.com/AMR-Autonomy-and-Research-Lab/amr1-tec-core/blob/main/Dise%C3%B1o_CAJA/CajaNuevaAMRF2.STL">
+    📥 Descargar STL
+  </a>
+</p>
 
 Compatible con:
 - Cura, PrusaSlicer, Simplify3D
