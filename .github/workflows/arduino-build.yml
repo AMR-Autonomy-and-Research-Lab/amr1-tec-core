@@ -34,7 +34,7 @@ jobs:
 
       - name: Build feather_can_tx
         run: |
-          arduino-cli compile --fqbn rp2040:rp2040:adafruit_feather_rp2040_can feather_can_tx/feather_can_tx.ino
+          arduino-cli compile --fqbn rp2040:rp2040:adafruit_feather_can feather_can_tx/feather_can_tx.ino
 
   build-rx:
     name: Build Feather CAN RX
@@ -63,4 +63,4 @@ jobs:
 
       - name: Build feather_can_rx
         run: |
-          arduino-cli compile --fqbn rp2040:rp2040:adafruit_feather_rp2040_can feather_can_rx/feather_can_rx.ino
+          arduino-cli compile --fqbn rp2040:rp2040:adafruit_feather_can feather_can_rx/feather_can_rx.ino
