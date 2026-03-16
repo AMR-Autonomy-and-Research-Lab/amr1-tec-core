@@ -39,7 +39,7 @@
 <br/>
 
 <a href="https://htmlpreview.github.io/?https://raw.githubusercontent.com/AMR-Autonomy-and-Research-Lab/amr1-tec-core/main/docs/hardware/3d_viewer/index.html">
-  <img src="docs/hardware/images/3d_viewer_preview.svg" alt="Abrir Visor 3D Interactivo de la PCB" width="860"/>
+  <img src="docs/hardware/images/3d_viewer_preview.png" alt="Abrir Visor 3D Interactivo de la PCB" width="860"/>
 </a>
 
 <br/><br/>
