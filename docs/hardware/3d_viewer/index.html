@@ -96,7 +96,7 @@
         };
 
         const mtlLoader = new MTLLoader(manager);
-        mtlLoader.setPath('/3D_Models/PCB_3D/');
+        mtlLoader.setPath('https://raw.githubusercontent.com/AMR-Autonomy-and-Research-Lab/amr1-tec-core/main/3D_Models/PCB_3D/');
         mtlLoader.load('OBJ_PCB_Final.mtl', function (materials) {
             materials.preload();
             
@@ -108,7 +108,7 @@
 
             const objLoader = new OBJLoader(manager);
             objLoader.setMaterials(materials);
-            objLoader.setPath('/3D_Models/PCB_3D/');
+            objLoader.setPath('https://raw.githubusercontent.com/AMR-Autonomy-and-Research-Lab/amr1-tec-core/main/3D_Models/PCB_3D/');
             objLoader.load('OBJ_PCB_Final.obj', function (object) {
                 // Escalar el objeto brutalmente hacia abajo porque EasyEDA exporta en miles de unidades (mm * 10 o similar)
                 object.scale.set(0.01, 0.01, 0.01);
