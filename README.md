@@ -16,10 +16,10 @@ Hemos superado los diagramas estáticos tradicionales. Puedes explorar cada comp
 
 <div align="center">
   <br />
-  <a href="https://amr1-tec-core.vercel.app">
-    <img src="https://img.shields.io/badge/⚡_Abrir_Mapa_Interactivo_de_la_Placa_PCB-VER_AHORA-00f0ff?style=for-the-badge&logo=vercel" alt="Abrir Mapa Interactivo" />
+  <a href="https://htmlpreview.github.io/?https://raw.githubusercontent.com/AMR-Autonomy-and-Research-Lab/amr1-tec-core/main/docs/hardware/ibom_final.html">
+    <img src="https://img.shields.io/badge/⚡_Abrir_Mapa_Interactivo_de_la_Placa_PCB-VER_AHORA-00f0ff?style=for-the-badge&logo=github" alt="Abrir Mapa Interactivo" />
   </a>
-  <p><small>(Desplegado automáticamente vía Vercel — 100% interactivo en tu navegador)</small></p>
+  <p><small>(Visor interactivo online de iBom — Directamente en tu navegador)</small></p>
   <br />
 </div>
 
