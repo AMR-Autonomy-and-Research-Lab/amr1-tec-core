@@ -4768,13 +4768,13 @@ var controls=new THREE.OrbitControls(camera,renderer.domElement);
 controls.enableDamping=true;controls.dampingFactor=0.07;
 controls.autoRotate=true;controls.autoRotateSpeed=1.5;
 controls.minDistance=0.1;controls.maxDistance=2000;
-scene.add(new THREE.AmbientLight(0xffffff,0.5));
-var hemi=new THREE.HemisphereLight(0xd4eaff,0x0f1e38,0.6);scene.add(hemi);
-var sun=new THREE.DirectionalLight(0xffffff,2.0);sun.position.set(30,80,50);
+scene.add(new THREE.AmbientLight(0xffffff,0.25));
+var hemi=new THREE.HemisphereLight(0xd4eaff,0x0a1428,0.4);scene.add(hemi);
+var sun=new THREE.DirectionalLight(0xfff8ee,1.2);sun.position.set(30,80,50);
 sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);scene.add(sun);
-var fill=new THREE.DirectionalLight(0x8888ff,0.5);fill.position.set(-30,10,-20);scene.add(fill);
-var bp=new THREE.PointLight(0x00aaff,4,500);bp.position.set(-60,30,60);scene.add(bp);
-var pp=new THREE.PointLight(0xff0055,2,500);pp.position.set(60,50,-60);scene.add(pp);
+var fill=new THREE.DirectionalLight(0x6688bb,0.3);fill.position.set(-30,10,-20);scene.add(fill);
+var bp=new THREE.PointLight(0x0088ff,1.8,500);bp.position.set(-60,30,60);scene.add(bp);
+var pp=new THREE.PointLight(0xff0044,0.8,500);pp.position.set(60,50,-60);scene.add(pp);
 var ground=new THREE.Mesh(new THREE.PlaneGeometry(2000,2000),
     new THREE.MeshStandardMaterial({color:0x0d1828,roughness:0.8,transparent:true,opacity:0.6}));
 ground.rotation.x=-Math.PI/2;ground.receiveShadow=true;scene.add(ground);
@@ -4816,11 +4816,19 @@ function parseModel(buf){
             if(!c.isMesh||!c.material)return;
             var m=c.material;m.side=THREE.DoubleSide;c.castShadow=c.receiveShadow=true;
             var r=m.color.r,g=m.color.g,b=m.color.b;
-            if(g>r&&g>b&&g>0.3){m.roughness=0.15;m.metalness=0.05;}
-            else if(r<0.2&&g<0.2&&b<0.2){m.roughness=0.55;m.metalness=0;}
-            else if(r>0.5&&g>0.5&&b>0.5){m.roughness=0.25;m.metalness=0.85;}
-            else if(r>0.6&&g<0.5&&b<0.3){m.roughness=0.3;m.metalness=0.9;}
-            else{m.roughness=0.5;m.metalness=0.1;}
+            // Substrato FR4 blanco → tinte marfil/crema, muy mate
+            if(r>0.85&&g>0.85&&b>0.85){m.color.set(0xdfd8c8);m.roughness=0.95;m.metalness=0;}
+            // Mascara de soldadura teal/azul (default EasyEDA) → semi-gloss
+            else if(b>0.55&&g>0.45&&r<0.75){m.roughness=0.18;m.metalness=0.04;}
+            // Mascara verde clasica
+            else if(g>r&&g>b&&g>0.3){m.roughness=0.15;m.metalness=0.04;}
+            // Chips / plastico negro
+            else if(r<0.25&&g<0.25&&b<0.25){m.roughness=0.62;m.metalness=0;}
+            // Cobre / pads / pistas naranja
+            else if(r>0.6&&g<0.5&&b<0.3){m.color.set(0xb87333);m.roughness=0.22;m.metalness=0.92;}
+            // Metal / plata / pines
+            else if(r>0.5&&g>0.5&&b>0.5){m.roughness=0.18;m.metalness=0.88;}
+            else{m.roughness=0.55;m.metalness=0.05;}
             m.needsUpdate=true;
         });
         model.rotation.x=-Math.PI/2;scene.add(model);
