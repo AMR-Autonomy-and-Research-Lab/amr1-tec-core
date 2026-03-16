@@ -23,7 +23,7 @@
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
     <!-- Incluir THREE.js y cargadores necesarios -->
-    <script async src="https://unpkg.com/es-module-shims@1.8.0/dist/es-module-shims.js"></script>
+    <script src="https://unpkg.com/es-module-shims@1.8.0/dist/es-module-shims.js"></script>
     <script type="importmap">
       {
         "imports": {
@@ -99,7 +99,7 @@
         };
 
         const gltfLoader = new GLTFLoader(manager);
-        gltfLoader.load('https://raw.githubusercontent.com/AMR-Autonomy-and-Research-Lab/amr1-tec-core/main/3D_Models/PCB_3D/PCB_Final.glb', function (gltf) {
+        gltfLoader.load('https://cdn.jsdelivr.net/gh/AMR-Autonomy-and-Research-Lab/amr1-tec-core@main/3D_Models/PCB_3D/PCB_Final.glb', function (gltf) {
             const object = gltf.scene;
             
             // Mejorar materiales PBR para que parezca fotorrealista (estilo PCBWay)

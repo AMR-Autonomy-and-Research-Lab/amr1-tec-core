@@ -1,90 +1,161 @@
 <div align="center">
-  <br />
-  <img src="https://img.shields.io/badge/AMR-Autonomy%20%26%20Research%20Lab-0D0F14?style=for-the-badge&logo=appveyor" alt="AMR Lab" />
-  <h1>AMR1-TEC-CORE</h1>
-  <p><strong>Plataforma integral de hardware para investigación en Robótica Móvil Autónoma</strong></p>
-  <br />
-</div>
 
-> **AMR1-TEC-CORE** es el cerebro electrónico que integra percepción, navegación, control de actuadores y sistemas embebidos en un diseño único. Desarrollado con estándares de industria para ambientes experimentales y robóticos.
+<img src="https://img.shields.io/badge/AMR%20Autonomy%20%26%20Research%20Lab-Tecnológico%20de%20Monterrey-003366?style=for-the-badge&logoColor=white" alt="AMR Lab" />
+
+# AMR1-TEC-CORE
+
+**Embedded Control Platform for Autonomous Mobile Robotics Research**
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-00f0ff?style=flat-square)](LICENSE)
+[![Platform](https://img.shields.io/badge/MCU-RP2040%20CAN-ff0055?style=flat-square&logo=raspberrypi)](https://www.adafruit.com/product/5709)
+[![Protocol](https://img.shields.io/badge/Bus-CAN%20500%20kbps-00cc44?style=flat-square)](https://en.wikipedia.org/wiki/CAN_bus)
+[![EDA](https://img.shields.io/badge/EDA-EasyEDA-f5a623?style=flat-square)](https://easyeda.com)
+[![CAD](https://img.shields.io/badge/3D%20CAD-Fusion%20360-0696D7?style=flat-square&logo=autodesk)](https://www.autodesk.com/products/fusion-360)
+
+</div>
 
 ---
 
-## ⚡ Diseño de Hardware y PCB (Dashboard Interactivo)
+> **AMR1-TEC-CORE** is a custom-designed embedded control board that integrates perception, closed-loop actuator control, CAN bus distribution, and real-time telemetry display in a single unified PCB. Engineered to production standards for autonomous mobile robotics research at Tec de Monterrey.
 
-Hemos superado los diagramas estáticos tradicionales. Puedes explorar cada componente, pista y pad de soldadura de nuestra PCB de control de manera completamente interactiva:
+---
+
+## Interactive Hardware Dashboard
+
+Explore the PCB beyond static images — use the live interactive viewers below:
 
 <div align="center">
-  <br />
-  <a href="https://htmlpreview.github.io/?https://raw.githubusercontent.com/AMR-Autonomy-and-Research-Lab/amr1-tec-core/main/docs/hardware/ibom_final.html">
-    <img src="https://img.shields.io/badge/⚡_Abrir_Mapa_Interactivo_de_la_Placa_PCB-VER_AHORA-00f0ff?style=for-the-badge&logo=github" alt="Abrir Mapa Interactivo" />
-  </a>
-  &nbsp;&nbsp;&nbsp;
-  <a href="https://htmlpreview.github.io/?https://raw.githubusercontent.com/AMR-Autonomy-and-Research-Lab/amr1-tec-core/main/docs/hardware/3d_viewer/index.html">
-    <img src="https://img.shields.io/badge/📦_Abrir_Visor_Espacial_3D_de_Geometría-ROTAR_AHORA-ff0055?style=for-the-badge&logo=threedotjs" alt="Abrir Visor 3D" />
-  </a>
-  <br /><br />
-  <p><small>(Visores interactivos online creados desde cero — Renderizado directo en tu navegador)</small></p>
-  <br />
+
+| Viewer | Description |
+|--------|-------------|
+| [**iBOM Interactive Map**](https://htmlpreview.github.io/?https://raw.githubusercontent.com/AMR-Autonomy-and-Research-Lab/amr1-tec-core/main/docs/hardware/ibom_final.html) | Click any component to locate it on the PCB layout |
+| [**3D Spatial Viewer**](https://htmlpreview.github.io/?https://raw.githubusercontent.com/AMR-Autonomy-and-Research-Lab/amr1-tec-core/main/docs/hardware/3d_viewer/index.html) | Rotate, zoom, and inspect the full 3D PCB geometry |
+
 </div>
 
 ---
 
-## 📸 Renderizados y Arquitectura
-
-Guarda las fotos de tu placa en la carpeta `docs/hardware/images/` con los nombres indicados para que se visualicen aquí en el repositorio de manera ultra profesional:
+## PCB Design Gallery
 
 <div align="center">
-  
-### Render 3D 
-<img src="docs/hardware/images/pcb_3d.png" alt="Render 3D de la PCB" width="800" onerror="this.src='https://via.placeholder.com/800x400/000000/00f0ff?text=Guarda+tu+render+azul+como+docs/hardware/images/pcb_3d.png'" />
 
-### Ruteo de Hardware
-<img src="docs/hardware/images/pcb_ruteo.png" alt="PCB Route" width="800" onerror="this.src='https://via.placeholder.com/800x400/000000/00f0ff?text=Guarda+tu+ruteo+como+docs/hardware/images/pcb_ruteo.png'" />
+### 3D Render
+<img src="docs/hardware/images/pcb_3d.png" alt="PCB 3D Render" width="800" />
 
-### Esquemático
-<img src="docs/hardware/images/esquematico.png" alt="Esquematico" width="800" onerror="this.src='https://via.placeholder.com/800x400/000000/00f0ff?text=Guarda+tu+esquematico+como+docs/hardware/images/esquematico.png'" />
+### PCB Layout & Routing
+<img src="docs/hardware/images/pcb_ruteo.png" alt="PCB Routing" width="800" />
+
+### Schematic
+<img src="docs/hardware/images/esquematico.png" alt="Schematic" width="800" />
 
 </div>
 
 ---
 
-## 📦 Arquitectura del Proyecto
+## Technical Specifications
 
-```text
+### Central Processing & Communication
+
+| Parameter | Value |
+|-----------|-------|
+| Microcontroller | Adafruit Feather RP2040 CAN |
+| CAN Controller | MCP2515 (SPI) |
+| CAN Bus Speed | 500 kbps |
+| Firmware Serial Input | 115200 baud |
+| Form Factor | Feather-compatible |
+
+### Linear Actuator Control (Closed-Loop)
+
+| Parameter | Value |
+|-----------|-------|
+| Actuator | Pololu Glideforce High-Speed LD |
+| Load Rating | 12 kgf |
+| Stroke Length | 6 in |
+| Supply Voltage | 12 V |
+| Control Method | PWM + Direction + FLT feedback |
+| Position Feedback | Potentiometer (analog) |
+
+### Telemetry Display
+
+| Parameter | Value |
+|-----------|-------|
+| Display | SSD1306 OLED 128×64 |
+| Interface | I²C |
+| Data Shown | CAN bus status, PWM duty, current, FLT diagnostics |
+
+---
+
+## Repository Structure
+
+```
 amr1-tec-core/
-├── 📂 PCB_Design/              # Diseño electrónico en EasyEDA y archivos Gerber
-├── 📂 feather_can_tx/          # Transmisor de Comandos Serial → CAN (115200 a 500 kbps)
-├── 📂 feather_can_rx/          # Receptor CAN y cerebro de motor y actuadores Pololu
-├── 📂 docs/hardware/           # Entorno Web del visor iBom para soldadura interactiva
-└── 📂 Diseño_CAJA/             # Modelos 3D (.STL) de la carcasa protectora
+├── PCB_Design/
+│   ├── PCB_AMR_Gerber/        # Validated Gerber files ready for fabrication
+│   └── PCB_AMR_Gerber.zip     # Pre-packaged Gerber ZIP for JLCPCB / PCBWay
+├── 3D_Models/
+│   └── PCB_3D/
+│       ├── PCB_Final.glb      # Optimized 3D model (Three.js viewer)
+│       └── OBJ_PCB_Final.obj  # Raw OBJ export from EasyEDA
+├── feather_can_tx/            # Serial → CAN transmitter firmware (RP2040)
+├── feather_can_rx/            # CAN receiver + actuator control firmware
+├── docs/hardware/
+│   ├── ibom_final.html        # Interactive Bill of Materials
+│   └── 3d_viewer/
+│       └── index.html         # WebGL 3D PCB viewer
+└── Diseño_CAJA/               # Enclosure 3D models (.STL)
 ```
 
-## 🛠 Especificaciones Técnicas
+---
 
-### Control Central y Comunicaciones
-*   Microcontrolador: **Adafruit Feather RP2040 CAN** (MCP2515) operando a 500 kbps.
-*   Protocolos robustos de comunicación para distribución de comandos sin pérdida de latencia.
+## PCB Fabrication
 
-### Actuador Lineal y Frenos (Lazo Cerrado)
-*   **Pololu Glideforce High-Speed LD** (12 kgf, carrera 6", 12V).
-*   Control vectorial PWM y Dirección con protecciones (`FLT`).
-*   Feedback absoluto por potenciómetro en pin analógico.
+The Gerber files have been validated and are ready to order directly from JLCPCB or PCBWay:
 
-### Display de Telemetría On-Board
-*   **SSD1306 OLED** 128×64 I2C. Provee telemetría en tiempo real: Red CAN, PWM, corriente y diagnóstico de fallas (FLT).
+1. Navigate to `PCB_Design/PCB_AMR_Gerber/` or download `PCB_AMR_Gerber.zip`
+2. Upload the ZIP to [JLCPCB](https://jlcpcb.com) or [PCBWay](https://www.pcbway.com)
+3. The design uses standard commercial tolerances, PTH/NPTH drill sizes, and dual-layer solder mask — no custom parameters required
 
 ---
 
-## 🚀 Fabricación Inmediata
+## System Architecture
 
-Si quieres mandar a imprimir la placa en JLCPCB o PCBWay de inmediato, simplemente usa nuestros gerbers validados:
-
-1. Ve a la carpeta `PCB_Design/PCB_AMR_Gerber/` o descarga nuestro `PCB_AMR_Gerber.zip`
-2. Arrástralo a JLCPCB.
-3. El diseño usa márgenes comerciales, taladros PTH/NPTH estandarizados y máscara superior/inferior. Está listo para mandar a la fábrica.
+```
+┌─────────────────────────────────────────────────────┐
+│                   AMR1-TEC-CORE                      │
+│                                                      │
+│   Serial In (115200)                                 │
+│        │                                             │
+│   ┌────▼─────────────────┐                          │
+│   │  Feather RP2040 CAN  │                          │
+│   │  (MCP2515 @ SPI)     │                          │
+│   └──┬──────────┬────────┘                          │
+│      │          │                                    │
+│   CAN Bus     I²C Bus                               │
+│   500 kbps    SSD1306 OLED                          │
+│      │                                               │
+│   ┌──▼──────────────────┐                           │
+│   │  CAN RX Node (RP2040)│                          │
+│   └──┬──────────────────┘                           │
+│      │                                               │
+│   PWM + DIR + FLT                                   │
+│      │                                               │
+│   ┌──▼──────────────────┐                           │
+│   │  Linear Actuator     │                          │
+│   │  Pololu LD 12kgf     │◄── Pot feedback          │
+│   └─────────────────────┘                           │
+└─────────────────────────────────────────────────────┘
+```
 
 ---
 
-> Diseñado por el **AMR Autonomy and Research Lab** — Tecnológico de Monterrey  
-> Distribuido bajo licencia MIT.
+## License
+
+Distributed under the [MIT License](LICENSE).
+
+---
+
+<div align="center">
+
+Designed by the **AMR Autonomy and Research Lab** · Tecnológico de Monterrey
+
+</div>
