@@ -65,21 +65,25 @@
         controls.autoRotate = true; // Empieza girando para el efecto WOW
         controls.autoRotateSpeed = 2.0;
 
-        // Iluminación ultra estetica (Estilo Cyberpunk/Estudio)
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+        // Iluminación ultra estetica (Estilo Cyberpunk/Estudio fotográfico)
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
         scene.add(ambientLight);
 
-        const directionalLight = new THREE.DirectionalLight(0xffffff, 1.2);
+        const hemiLight = new THREE.HemisphereLight(0xffffff, 0x0f1e38, 0.6);
+        scene.add(hemiLight);
+
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 1.5);
         directionalLight.position.set(20, 100, 50);
+        directionalLight.castShadow = true;
         scene.add(directionalLight);
 
-        const blueLight = new THREE.PointLight(0x00f0ff, 2, 200);
+        const blueLight = new THREE.PointLight(0x00aaff, 3, 300);
         blueLight.position.set(-50, 20, 50);
         scene.add(blueLight);
 
-        const redLight = new THREE.PointLight(0xff0055, 1, 200);
-        redLight.position.set(50, 20, -50);
-        scene.add(redLight);
+        const magentaLight = new THREE.PointLight(0xff0055, 1.5, 300);
+        magentaLight.position.set(50, 40, -50);
+        scene.add(magentaLight);
 
         let objectGroup = new THREE.Group();
         scene.add(objectGroup);
@@ -98,11 +102,37 @@
         gltfLoader.load('https://raw.githubusercontent.com/AMR-Autonomy-and-Research-Lab/amr1-tec-core/main/3D_Models/PCB_3D/PCB_Final.glb', function (gltf) {
             const object = gltf.scene;
             
-            // Forzar colores base si el GLB pierde el material
+            // Mejorar materiales PBR para que parezca fotorrealista (estilo PCBWay)
             object.traverse((child) => {
-                if (child.isMesh) {
-                    if (child.material) {
-                        child.material.side = THREE.DoubleSide;
+                if (child.isMesh && child.material) {
+                    const mat = child.material;
+                    mat.side = THREE.DoubleSide;
+                    // Detectar de qué está hecho por su color
+                    const r = mat.color.r, g = mat.color.g, b = mat.color.b;
+                    
+                    // Si es Verde (Tarjeta PCB Solder Mask)
+                    if (g > r && g > b && g > 0.4) {
+                        mat.roughness = 0.2; // Glossy
+                        mat.metalness = 0.1;
+                    } 
+                    // Si es negro/gris oscuro (Chips de Silicio / Plástico)
+                    else if (r < 0.25 && g < 0.25 && b < 0.25) {
+                        mat.roughness = 0.6; // Plástico mate
+                        mat.metalness = 0.0;
+                    } 
+                    // Si es Gris Claro / Metálico / Naranja Oscuro (Pines, Conectores, Soldadura)
+                    else if ((r > 0.5 && g > 0.5 && b > 0.5) || (r > 0.6 && g < 0.5 && b < 0.3)) {
+                        mat.roughness = 0.3; // Metálico pulido
+                        mat.metalness = 0.9; // Muy metálico
+                    }
+                    // Si es Blanco (Serigrafía / Conectores)
+                    else if (r > 0.9 && g > 0.9 && b > 0.9) {
+                        mat.roughness = 0.8;
+                        mat.metalness = 0.0;
+                    }
+                    else {
+                        mat.roughness = 0.5; // Por defecto
+                        mat.metalness = 0.1;
                     }
                 }
             });
