@@ -167,7 +167,7 @@ M 100 1 0 0 0   # Motor: vel, enable, reverse, lo, hi
 ### Vista previa PCB
 
 <p align="center">
-  <a href="https://htmlpreview.github.io/?https://raw.githubusercontent.com/AMR-Autonomy-and-Research-Lab/amr1-tec-core/main/docs/hardware/ibom_final.html">
+  <a href="https://amr1-tec-core.vercel.app">
     <img src="https://img.shields.io/badge/🔍_Abrir_Mapa_Interactivo_(iBom)-Buscar_Componentes_y_Pistas-00f0ff?style=for-the-badge" alt="Abrir Mapa Interactivo" />
   </a>
 </p>
