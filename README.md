@@ -28,6 +28,32 @@
 
 ---
 
+## Visor 3D Interactivo del Robot AMR1
+
+<div align="center">
+
+<br/>
+
+**Diseño CAD completo del robot AMR1 — haz clic para inspeccionarlo en 3D directamente en tu navegador.**
+
+<br/>
+
+<a href="https://htmlpreview.github.io/?https://raw.githubusercontent.com/AMR-Autonomy-and-Research-Lab/amr1-tec-core/main/docs/amr1_viewer/index.html">
+  <img src="docs/hardware/images/amr1_preview.png" alt="Abrir Visor 3D del Robot AMR1" width="860"/>
+</a>
+
+<br/><br/>
+
+<a href="https://htmlpreview.github.io/?https://raw.githubusercontent.com/AMR-Autonomy-and-Research-Lab/amr1-tec-core/main/docs/amr1_viewer/index.html">
+  <img src="https://img.shields.io/badge/🤖_ABRIR_VISOR_3D_AMR1-Rotar_%7C_Zoom_%7C_Inspeccionar_el_Robot-003d7a?style=for-the-badge" height="38"/>
+</a>
+
+<br/><br/>
+
+</div>
+
+---
+
 ## Visor 3D Interactivo de la PCB
 
 <div align="center">
