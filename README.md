@@ -166,6 +166,15 @@ M 100 1 0 0 0   # Motor: vel, enable, reverse, lo, hi
 
 ### Vista previa PCB
 
+<p align="center">
+  <a href="https://htmlpreview.github.io/?https://raw.githubusercontent.com/AMR-Autonomy-and-Research-Lab/amr1-tec-core/main/docs/hardware/ibom_final.html">
+    <img src="https://img.shields.io/badge/🔍_Abrir_Mapa_Interactivo_(iBom)-Buscar_Componentes_y_Pistas-00f0ff?style=for-the-badge" alt="Abrir Mapa Interactivo" />
+  </a>
+</p>
+<p align="center">
+  <small>Mapa interactivo generado automáticamente desde EasyEDA. Permite inspeccionar capas, buscar componentes (ej: "R1") y ver ruteo para facilitar el ensamblaje.</small>
+</p>
+
 - **SVG/Preview:** Descarga el artifact `pcb-preview-svg` del workflow [PCB Preview](https://github.com/AMR-Autonomy-and-Research-Lab/amr1-tec-core/actions/workflows/pcb-preview.yml) en Actions
 - **Vista 3D del PCB:** Exporta desde EasyEDA (File → Exportar → 3D Model) y sube el `.obj` o `.stl` para visualizarlo aquí
 

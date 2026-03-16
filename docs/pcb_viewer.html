@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AMR PCB — Visor</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: system-ui, sans-serif; background: #0f0f14; color: #e0e0e0; min-height: 100vh; }
+    header { padding: 1rem; text-align: center; background: #16213e; }
+    header h1 { font-size: 1.25rem; }
+    header p { font-size: 0.85rem; opacity: 0.8; margin-top: 0.25rem; }
+    #viewer { padding: 1rem; display: flex; justify-content: center; align-items: center; min-height: 400px; }
+    #viewer svg { max-width: 100%; height: auto; filter: drop-shadow(0 4px 20px rgba(0,0,0,0.5)); }
+    #viewer.loading { color: #888; }
+    .controls { padding: 1rem; text-align: center; font-size: 0.85rem; }
+    .controls button {
+      background: #5588ff; color: white; border: none; padding: 0.5rem 1rem;
+      border-radius: 6px; cursor: pointer; margin: 0 0.25rem; font-size: 0.9rem;
+    }
+    .controls button:hover { background: #6699ff; }
+    .controls button:disabled { background: #444; cursor: not-allowed; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>PCB AMR — Visor</h1>
+    <p><strong>Comando:</strong> <code>cd c:\Users\Alfonso\Documents\AMR_GENERAL</code> y luego <code>npx serve .</code> → abre <a href="http://localhost:3000/docs/pcb_viewer.html" target="_blank">localhost:3000/docs/pcb_viewer.html</a></p>
+  </header>
+  <div id="viewer" class="loading">
+    Haz clic en "Cargar PCB" para ver los Gerbers (capas cobre + máscara + serigrafía)
+  </div>
+  <div class="controls">
+    <button id="btnLoad">Cargar PCB</button>
+    <span id="status"></span>
+  </div>
+
+  <script src="https://unpkg.com/pcb-stackup@4.2.8/dist/pcb-stackup.min.js"></script>
+  <script>
+    const GERBERS = [
+      '../PCB_Design/PCB_AMR_Gerber/Gerber_TopLayer.GTL',
+      '../PCB_Design/PCB_AMR_Gerber/Gerber_TopSolderMaskLayer.GTS',
+      '../PCB_Design/PCB_AMR_Gerber/Gerber_TopSilkscreenLayer.GTO',
+      '../PCB_Design/PCB_AMR_Gerber/Gerber_BottomLayer.GBL',
+      '../PCB_Design/PCB_AMR_Gerber/Gerber_BottomSolderMaskLayer.GBS',
+      '../PCB_Design/PCB_AMR_Gerber/Gerber_BottomSilkscreenLayer.GBO',
+      '../PCB_Design/PCB_AMR_Gerber/Gerber_BoardOutlineLayer.GKO',
+      '../PCB_Design/PCB_AMR_Gerber/Drill_PTH_Through.DRL',
+    ];
+
+    document.getElementById('btnLoad').onclick = async () => {
+      const viewer = document.getElementById('viewer');
+      const status = document.getElementById('status');
+      const btn = document.getElementById('btnLoad');
+      btn.disabled = true;
+      status.textContent = 'Cargando Gerbers...';
+      viewer.className = 'loading';
+      viewer.innerHTML = '';
+
+      try {
+        const layers = await Promise.all(GERBERS.map(async (path) => {
+          const name = path.split('/').pop();
+          const r = await fetch(path);
+          if (!r.ok) throw new Error(`No se encontró: ${name}`);
+          const gerber = await r.text();
+          return { filename: name, gerber };
+        }));
+
+        const stackup = await pcbStackup(layers);
+        viewer.innerHTML = stackup.top.svg;
+        viewer.className = '';
+        status.textContent = '✓ PCB cargada (vista superior)';
+      } catch (e) {
+        viewer.innerHTML = `<p style="color:#f88">Error: ${e.message}</p><p style="font-size:0.9rem;margin-top:0.5rem">Asegúrate de ejecutar <code>npx serve .</code> desde la raíz del proyecto (AMR_GENERAL).</p>`;
+        status.textContent = 'Error al cargar';
+      }
+      btn.disabled = false;
+    };
+  </script>
+</body>
+</html>
