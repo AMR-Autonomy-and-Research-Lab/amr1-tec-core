@@ -43,8 +43,7 @@
     <script type="module">
         import * as THREE from 'three';
         import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-        import { OBJLoader } from 'three/addons/loaders/OBJLoader.js';
-        import { MTLLoader } from 'three/addons/loaders/MTLLoader.js';
+        import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
         // Escena, cámara y renderizador
         const scene = new THREE.Scene();
@@ -95,43 +94,46 @@
             document.getElementById('loading').innerHTML = `<div class="spinner"></div><br/>Cargando: ${loaded} de ${total} componentes 3D...`;
         };
 
-        const mtlLoader = new MTLLoader(manager);
-        mtlLoader.setPath('https://raw.githubusercontent.com/AMR-Autonomy-and-Research-Lab/amr1-tec-core/main/3D_Models/PCB_3D/');
-        mtlLoader.load('OBJ_PCB_Final.mtl', function (materials) {
-            materials.preload();
+        const gltfLoader = new GLTFLoader(manager);
+        gltfLoader.load('https://raw.githubusercontent.com/AMR-Autonomy-and-Research-Lab/amr1-tec-core/main/3D_Models/PCB_3D/PCB_Final.glb', function (gltf) {
+            const object = gltf.scene;
             
-            // Forzar que los materiales tengan un color base vistoso si fallan las texturas
-            for (const mat in materials.materials) {
-                materials.materials[mat].side = THREE.DoubleSide;
-                materials.materials[mat].shininess = 50;
-            }
-
-            const objLoader = new OBJLoader(manager);
-            objLoader.setMaterials(materials);
-            objLoader.setPath('https://raw.githubusercontent.com/AMR-Autonomy-and-Research-Lab/amr1-tec-core/main/3D_Models/PCB_3D/');
-            objLoader.load('OBJ_PCB_Final.obj', function (object) {
-                // Escalar el objeto brutalmente hacia abajo porque EasyEDA exporta en miles de unidades (mm * 10 o similar)
-                object.scale.set(0.01, 0.01, 0.01);
-
-                // Centrar el objeto matemáticamente después de escalar
-                const box = new THREE.Box3().setFromObject(object);
-                const center = box.getCenter(new THREE.Vector3());
-                const size = box.getSize(new THREE.Vector3());
-                
-                object.position.x += (object.position.x - center.x);
-                object.position.y += (object.position.y - center.y);
-                object.position.z += (object.position.z - center.z);
-                
-                // Rotar para que se vea plana (normalmente vienen de pie desde EasyEDA)
-                object.rotation.x = -Math.PI / 2;
-
-                objectGroup.add(object);
-                
-                // Ajustar la cámara automáticamente basada en el tamaño real del objeto ya escalado
-                const maxDim = Math.max(size.x, size.y, size.z);
-                camera.position.set(0, maxDim * 1.5, maxDim * 1.5);
-                controls.target.set(0, 0, 0);
+            // Forzar colores base si el GLB pierde el material
+            object.traverse((child) => {
+                if (child.isMesh) {
+                    if (child.material) {
+                        child.material.side = THREE.DoubleSide;
+                    }
+                }
             });
+
+            // Escalar objeto hacia abajo (si es inmenso exportado de EasyEDA)
+            object.scale.set(0.01, 0.01, 0.01);
+
+            // Centrar objeto matemáticamente
+            const box = new THREE.Box3().setFromObject(object);
+            const center = box.getCenter(new THREE.Vector3());
+            const size = box.getSize(new THREE.Vector3());
+            
+            object.position.x += (object.position.x - center.x);
+            object.position.y += (object.position.y - center.y);
+            object.position.z += (object.position.z - center.z);
+            
+            object.rotation.x = -Math.PI / 2;
+
+            objectGroup.add(object);
+            
+            // Ajustar cámara
+            const maxDim = Math.max(size.x, size.y, size.z);
+            if (maxDim > 0) {
+                camera.position.set(0, maxDim * 1.5, maxDim * 1.5);
+            } else {
+                camera.position.set(0, 50, 100);
+            }
+            controls.target.set(0, 0, 0);
+        }, undefined, function (error) {
+            console.error(error);
+            document.getElementById('loading').innerHTML = "Error al cargar el modelo 3D.";
         });
 
         // Loop de renderizado
