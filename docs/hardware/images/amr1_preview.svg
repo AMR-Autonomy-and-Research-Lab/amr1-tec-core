@@ -1,0 +1,163 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="480" viewBox="0 0 900 480">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0b1121"/>
+      <stop offset="100%" style="stop-color:#0d1830"/>
+    </linearGradient>
+    <linearGradient id="body_grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a3a6a"/>
+      <stop offset="100%" style="stop-color:#0f2550"/>
+    </linearGradient>
+    <linearGradient id="wheel_grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a1a"/>
+      <stop offset="100%" style="stop-color:#0a0a0a"/>
+    </linearGradient>
+    <filter id="blur_soft"><feGaussianBlur stdDeviation="8"/></filter>
+    <filter id="shadow"><feDropShadow dx="0" dy="10" stdDeviation="18" flood-color="#000" flood-opacity="0.7"/></filter>
+    <filter id="glow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <linearGradient id="glow_blue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#003d7a;stop-opacity:0.18"/>
+      <stop offset="100%" style="stop-color:#003d7a;stop-opacity:0"/>
+    </linearGradient>
+    <linearGradient id="glow_cyan" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#00f0ff;stop-opacity:0.08"/>
+      <stop offset="100%" style="stop-color:#00f0ff;stop-opacity:0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="480" fill="url(#bg)"/>
+  <rect width="900" height="480" fill="url(#glow_blue)"/>
+  <rect width="900" height="480" fill="url(#glow_cyan)"/>
+
+  <!-- Grid -->
+  <g stroke="#111e30" stroke-width="1" opacity="0.6">
+    <line x1="0" y1="60" x2="900" y2="60"/><line x1="0" y1="120" x2="900" y2="120"/>
+    <line x1="0" y1="180" x2="900" y2="180"/><line x1="0" y1="240" x2="900" y2="240"/>
+    <line x1="0" y1="300" x2="900" y2="300"/><line x1="0" y1="360" x2="900" y2="360"/>
+    <line x1="0" y1="420" x2="900" y2="420"/>
+    <line x1="90" y1="0" x2="90" y2="480"/><line x1="180" y1="0" x2="180" y2="480"/>
+    <line x1="270" y1="0" x2="270" y2="480"/><line x1="360" y1="0" x2="360" y2="480"/>
+    <line x1="450" y1="0" x2="450" y2="480"/><line x1="540" y1="0" x2="540" y2="480"/>
+    <line x1="630" y1="0" x2="630" y2="480"/><line x1="720" y1="0" x2="720" y2="480"/>
+    <line x1="810" y1="0" x2="810" y2="480"/>
+  </g>
+
+  <!-- Shadow glow under robot -->
+  <ellipse cx="420" cy="370" rx="200" ry="20" fill="#003d7a" opacity="0.25" filter="url(#blur_soft)"/>
+
+  <!-- Robot body — main chassis (isometric-ish top-down perspective) -->
+  <g filter="url(#shadow)">
+    <!-- Main body -->
+    <rect x="260" y="160" width="340" height="190" rx="18" fill="url(#body_grad)" stroke="#2a4a8a" stroke-width="1.5"/>
+    <!-- Top panel highlight -->
+    <rect x="270" y="168" width="320" height="80" rx="10" fill="#1e3f72" stroke="#2a5090" stroke-width="1" opacity="0.8"/>
+    <!-- Bottom panel -->
+    <rect x="270" y="258" width="320" height="82" rx="10" fill="#162e58" stroke="#1e3f70" stroke-width="1" opacity="0.7"/>
+  </g>
+
+  <!-- Wheels — front left -->
+  <ellipse cx="278" cy="200" rx="30" ry="42" fill="url(#wheel_grad)" stroke="#2a2a2a" stroke-width="2"/>
+  <ellipse cx="278" cy="200" rx="16" ry="22" fill="#222" stroke="#333" stroke-width="1"/>
+  <ellipse cx="278" cy="200" rx="6" ry="8" fill="#444"/>
+
+  <!-- Wheels — front right -->
+  <ellipse cx="582" cy="200" rx="30" ry="42" fill="url(#wheel_grad)" stroke="#2a2a2a" stroke-width="2"/>
+  <ellipse cx="582" cy="200" rx="16" ry="22" fill="#222" stroke="#333" stroke-width="1"/>
+  <ellipse cx="582" cy="200" rx="6" ry="8" fill="#444"/>
+
+  <!-- Wheels — rear left -->
+  <ellipse cx="278" cy="312" rx="30" ry="42" fill="url(#wheel_grad)" stroke="#2a2a2a" stroke-width="2"/>
+  <ellipse cx="278" cy="312" rx="16" ry="22" fill="#222" stroke="#333" stroke-width="1"/>
+  <ellipse cx="278" cy="312" rx="6" ry="8" fill="#444"/>
+
+  <!-- Wheels — rear right -->
+  <ellipse cx="582" cy="312" rx="30" ry="42" fill="url(#wheel_grad)" stroke="#2a2a2a" stroke-width="2"/>
+  <ellipse cx="582" cy="312" rx="16" ry="22" fill="#222" stroke="#333" stroke-width="1"/>
+  <ellipse cx="582" cy="312" rx="6" ry="8" fill="#444"/>
+
+  <!-- Axle bars -->
+  <rect x="278" y="194" width="304" height="12" rx="6" fill="#0d1e3a" stroke="#1a3060" stroke-width="1"/>
+  <rect x="278" y="306" width="304" height="12" rx="6" fill="#0d1e3a" stroke="#1a3060" stroke-width="1"/>
+
+  <!-- PCB / electronics area -->
+  <rect x="310" y="178" width="240" height="60" rx="6" fill="#0f2a1e" stroke="#1a5a3a" stroke-width="1"/>
+  <!-- PCB traces -->
+  <g stroke="#b87333" stroke-width="1.5" opacity="0.5">
+    <line x1="325" y1="198" x2="530" y2="198"/>
+    <line x1="325" y1="210" x2="480" y2="210"/>
+    <line x1="380" y1="185" x2="380" y2="228"/>
+    <line x1="460" y1="185" x2="460" y2="210"/>
+  </g>
+  <!-- MCU chip -->
+  <rect x="400" y="185" width="48" height="40" rx="3" fill="#111" stroke="#333" stroke-width="1"/>
+  <g fill="#444" opacity="0.8">
+    <rect x="395" y="192" width="5" height="4" rx="1"/><rect x="395" y="200" width="5" height="4" rx="1"/>
+    <rect x="395" y="208" width="5" height="4" rx="1"/>
+    <rect x="448" y="192" width="5" height="4" rx="1"/><rect x="448" y="200" width="5" height="4" rx="1"/>
+    <rect x="448" y="208" width="5" height="4" rx="1"/>
+  </g>
+  <circle cx="407" cy="191" r="3" fill="#1a1a1a"/>
+
+  <!-- Linear actuator -->
+  <rect x="330" y="268" width="200" height="20" rx="5" fill="#1a2a4a" stroke="#2a4a7a" stroke-width="1"/>
+  <rect x="330" y="272" width="120" height="12" rx="3" fill="#2a5a9a" opacity="0.7"/>
+  <circle cx="540" cy="278" r="9" fill="#1e3a6a" stroke="#2a5090" stroke-width="1"/>
+
+  <!-- Sensor / lidar placeholder -->
+  <circle cx="430" cy="155" r="22" fill="#0d1e3a" stroke="#1a3a7a" stroke-width="1.5"/>
+  <circle cx="430" cy="155" r="14" fill="#111" stroke="#222" stroke-width="1"/>
+  <circle cx="430" cy="155" r="5" fill="#00f0ff" opacity="0.6"/>
+  <line x1="430" y1="133" x2="430" y2="141" stroke="#1a4a8a" stroke-width="1"/>
+  <line x1="430" y1="169" x2="430" y2="177" stroke="#1a4a8a" stroke-width="1"/>
+  <line x1="408" y1="155" x2="416" y2="155" stroke="#1a4a8a" stroke-width="1"/>
+  <line x1="444" y1="155" x2="452" y2="155" stroke="#1a4a8a" stroke-width="1"/>
+
+  <!-- Emergency button -->
+  <circle cx="370" cy="302" r="14" fill="#cc0020" stroke="#ff0040" stroke-width="1.5"/>
+  <circle cx="370" cy="302" r="8" fill="#ff0040" opacity="0.8"/>
+
+  <!-- Battery indicator -->
+  <rect x="460" y="290" width="80" height="26" rx="4" fill="#0a1e0a" stroke="#1a4a1a" stroke-width="1"/>
+  <rect x="540" y="298" width="5" height="10" rx="2" fill="#1a4a1a"/>
+  <rect x="463" y="293" width="48" height="20" rx="2" fill="#00cc44" opacity="0.5"/>
+  <text x="487" y="307" font-family="monospace" font-size="9" fill="#00ff44" text-anchor="middle" opacity="0.8">100%</text>
+
+  <!-- Glow accents -->
+  <circle cx="200" cy="200" r="80" fill="#003d7a" opacity="0.06" filter="url(#blur_soft)"/>
+  <circle cx="680" cy="300" r="80" fill="#00f0ff" opacity="0.04" filter="url(#blur_soft)"/>
+
+  <!-- Right info panel -->
+  <g>
+    <text x="660" y="155" font-family="monospace" font-size="11" fill="#00f0ff" opacity="0.8">AMR1 ROBOT</text>
+    <line x1="655" y1="163" x2="880" y2="163" stroke="#00f0ff" stroke-width="0.5" opacity="0.3"/>
+
+    <text x="655" y="185" font-family="monospace" font-size="9" fill="#475569">PLATAFORMA</text>
+    <text x="730" y="185" font-family="monospace" font-size="9" fill="#94a3b8">Móvil Autónoma</text>
+
+    <text x="655" y="203" font-family="monospace" font-size="9" fill="#475569">MCU</text>
+    <text x="690" y="203" font-family="monospace" font-size="9" fill="#94a3b8">RP2040 CAN</text>
+
+    <text x="655" y="221" font-family="monospace" font-size="9" fill="#475569">ACTUADOR</text>
+    <text x="715" y="221" font-family="monospace" font-size="9" fill="#94a3b8">Pololu 12 kgf</text>
+
+    <text x="655" y="239" font-family="monospace" font-size="9" fill="#475569">BUS</text>
+    <text x="690" y="239" font-family="monospace" font-size="9" fill="#94a3b8">CAN 500 kbps</text>
+
+    <text x="655" y="257" font-family="monospace" font-size="9" fill="#475569">CAD</text>
+    <text x="690" y="257" font-family="monospace" font-size="9" fill="#94a3b8">SolidWorks</text>
+
+    <line x1="655" y1="268" x2="880" y2="268" stroke="#1e3a5a" stroke-width="0.5"/>
+
+    <text x="655" y="288" font-family="monospace" font-size="9" fill="#00f0ff" opacity="0.5">▸ VISOR 3D INTERACTIVO</text>
+    <text x="655" y="304" font-family="monospace" font-size="8" fill="#475569">Rotar · Zoom · Inspeccionar</text>
+  </g>
+
+  <!-- Top label -->
+  <text x="380" y="30" font-family="'Segoe UI', sans-serif" font-size="13" fill="#64748b" text-anchor="middle">AMR Autonomy and Research Lab · Tecnológico de Monterrey</text>
+
+  <!-- Bottom CTA -->
+  <rect x="0" y="430" width="900" height="50" fill="#0a1628" opacity="0.95"/>
+  <rect x="0" y="430" width="900" height="1" fill="#003d7a" opacity="0.5"/>
+  <text x="380" y="462" font-family="'Segoe UI', sans-serif" font-size="14" fill="#00f0ff" text-anchor="middle" filter="url(#glow)">▶  Haz clic para abrir el Visor 3D del Robot AMR1  —  Rotar · Zoom · Inspeccionar cada componente</text>
+</svg>

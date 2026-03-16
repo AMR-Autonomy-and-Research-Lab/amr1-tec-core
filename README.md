@@ -39,7 +39,7 @@
 <br/>
 
 <a href="https://htmlpreview.github.io/?https://raw.githubusercontent.com/AMR-Autonomy-and-Research-Lab/amr1-tec-core/main/docs/amr1_viewer/index.html">
-  <img src="docs/hardware/images/amr1_preview.png" alt="Abrir Visor 3D del Robot AMR1" width="860"/>
+  <img src="docs/hardware/images/amr1_preview.svg" alt="Abrir Visor 3D del Robot AMR1" width="860"/>
 </a>
 
 <br/><br/>
