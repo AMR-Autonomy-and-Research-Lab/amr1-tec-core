@@ -8,7 +8,7 @@
 
 # AMR1-TEC-CORE
 
-### Plataforma de Control Hardware para Robótica Móvil Autónoma
+### Plataforma de Robótica Móvil Autónoma — Hardware + Firmware + CAD
 
 <br/>
 
@@ -16,11 +16,11 @@
 [![MCU](https://img.shields.io/badge/MCU-RP2040_CAN-ff0055?style=flat-square&logo=raspberrypi&logoColor=white)](https://www.adafruit.com/product/5709)
 [![Bus CAN](https://img.shields.io/badge/Bus-CAN_500_kbps-00cc44?style=flat-square)](https://en.wikipedia.org/wiki/CAN_bus)
 [![EDA](https://img.shields.io/badge/EDA-EasyEDA-f5a623?style=flat-square)](https://easyeda.com)
-[![CAD 3D](https://img.shields.io/badge/CAD_3D-Fusion_360-0696D7?style=flat-square&logo=autodesk&logoColor=white)](https://www.autodesk.com/products/fusion-360)
+[![CAD 3D](https://img.shields.io/badge/CAD_3D-SolidWorks-005386?style=flat-square&logo=dassaultsystemes&logoColor=white)](https://www.solidworks.com)
 
 <br/>
 
-> PCB personalizada que unifica percepción, control de actuadores en lazo cerrado, distribución de bus CAN y telemetría en tiempo real en una sola tarjeta — diseñada con estándares de producción para investigación en robótica autónoma en el Tec de Monterrey.
+> Plataforma completa de robótica móvil autónoma — incluye diseño CAD del chasis, PCB personalizada con bus CAN, control de actuadores en lazo cerrado y telemetría en tiempo real. Desarrollada con estándares de producción para investigación en el Tec de Monterrey.
 
 <br/>
 
@@ -28,13 +28,13 @@
 
 ---
 
-## Visor 3D Interactivo del Robot AMR1
+## Visor 3D del Robot AMR1
 
 <div align="center">
 
 <br/>
 
-**Diseño CAD completo del robot AMR1 — haz clic para inspeccionarlo en 3D directamente en tu navegador.**
+**Chasis completo del AMR1 — haz clic para inspeccionar el ensamble 3D en tu navegador.**
 
 <br/>
 
@@ -54,13 +54,13 @@
 
 ---
 
-## Visor 3D Interactivo de la PCB
+## Visor 3D de la PCB + Mapa iBOM
 
 <div align="center">
 
 <br/>
 
-**Haz clic en la imagen para abrir el visor 3D completo en tu navegador — sin instalación, renderizado directo con WebGL.**
+**PCB personalizada AMR1-TEC-CORE — haz clic para abrirla en el visor 3D interactivo.**
 
 <br/>
 
@@ -71,47 +71,22 @@
 <br/><br/>
 
 <a href="https://htmlpreview.github.io/?https://raw.githubusercontent.com/AMR-Autonomy-and-Research-Lab/amr1-tec-core/main/docs/hardware/3d_viewer/index.html">
-  <img src="https://img.shields.io/badge/🧊_ABRIR_VISOR_3D-Rotar_%7C_Zoom_%7C_Inspeccionar_la_PCB-ff0055?style=for-the-badge" height="38"/>
+  <img src="https://img.shields.io/badge/🧊_ABRIR_VISOR_3D_PCB-Rotar_%7C_Zoom_%7C_Inspeccionar-ff0055?style=for-the-badge" height="38"/>
 </a>
 &nbsp;&nbsp;
 <a href="https://htmlpreview.github.io/?https://raw.githubusercontent.com/AMR-Autonomy-and-Research-Lab/amr1-tec-core/main/docs/hardware/ibom_final.html">
-  <img src="https://img.shields.io/badge/⚡_MAPA_iBOM-Click_en_cualquier_componente_para_localizarlo-00f0ff?style=for-the-badge" height="38"/>
+  <img src="https://img.shields.io/badge/⚡_MAPA_iBOM-Localizar_cualquier_componente-00f0ff?style=for-the-badge" height="38"/>
 </a>
 
 <br/><br/>
 
-| Herramienta | Tecnología | Para qué sirve |
-|:-----------:|:----------:|:---------------|
-| **Visor 3D** | WebGL · Three.js | Inspección visual, renders, verificación geométrica |
+| Herramienta | Tecnología | Descripción |
+|:-----------:|:----------:|:------------|
+| **Visor 3D Robot** | WebGL · Three.js | Inspección del chasis completo en 3D |
+| **Visor 3D PCB** | WebGL · Three.js | Inspección visual y verificación geométrica |
 | **Mapa iBOM** | HTML interactivo | Guía de soldadura, localización de componentes |
 
 <br/>
-
-</div>
-
----
-
-## Galería de la PCB
-
-<div align="center">
-
-> Guarda tus renders en `docs/hardware/images/` para que aparezcan aquí automáticamente.
-
-<!-- Descomenta cuando tengas los renders guardados:
-
-### Render 3D
-<a href="https://htmlpreview.github.io/?https://raw.githubusercontent.com/AMR-Autonomy-and-Research-Lab/amr1-tec-core/main/docs/hardware/3d_viewer/index.html">
-  <img src="docs/hardware/images/pcb_3d.png" alt="Render 3D — clic para abrir el visor interactivo" width="860"/>
-</a>
-<sub><i>↑ Clic en la imagen para abrir el visor 3D interactivo</i></sub>
-
-### Ruteo de la PCB
-<img src="docs/hardware/images/pcb_ruteo.png" alt="Ruteo PCB" width="860"/>
-
-### Esquemático
-<img src="docs/hardware/images/esquematico.png" alt="Esquemático" width="860"/>
-
--->
 
 </div>
 
@@ -121,7 +96,18 @@
 
 <div align="center">
 
-### Control Central y Comunicaciones
+### Robot AMR1 — Sistema Completo
+
+| Parámetro | Valor |
+|-----------|-------|
+| Chasis | Diseño propio en SolidWorks |
+| Tracción | 4 ruedas — Motor eléctrico MY1016Z3 |
+| Frenado | Sistema hidráulico de pinza (Pololu Glideforce LD) |
+| Alimentación | Batería 12 V |
+| Control | Feather RP2040 CAN via Bus CAN |
+| Comunicación | CAN 500 kbps |
+
+### PCB — Control Central y Comunicaciones
 
 | Parámetro | Valor |
 |-----------|-------|
@@ -131,7 +117,7 @@
 | Entrada Serie | UART 115200 baud |
 | Factor de Forma | Compatible Feather |
 
-### Control de Actuador Lineal — Lazo Cerrado
+### PCB — Control de Actuador Lineal (Lazo Cerrado)
 
 | Parámetro | Valor |
 |-----------|-------|
@@ -142,7 +128,7 @@
 | Control | PWM + Dirección + retroalimentación FLT |
 | Sensor de posición | Potenciómetro (ADC) |
 
-### Display de Telemetría a Bordo
+### PCB — Display de Telemetría a Bordo
 
 | Parámetro | Valor |
 |-----------|-------|
@@ -157,30 +143,28 @@
 ## Arquitectura del Sistema
 
 ```
-┌──────────────────────────────────────────────────┐
-│                  AMR1-TEC-CORE                   │
-│                                                  │
-│  Entrada UART (115200 baud)                      │
-│         │                                        │
-│  ┌──────▼──────────────────┐  ┌───────────────┐  │
-│  │   Feather RP2040 CAN    │  │ SSD1306 OLED  │  │
-│  │   MCP2515 @ SPI         ├─►│  128×64 I²C   │  │
-│  └──────┬──────────────────┘  │  Telemetría   │  │
-│         │                     └───────────────┘  │
-│    Bus CAN 500 kbps                              │
-│         │                                        │
-│  ┌──────▼──────────────────┐                     │
-│  │  Nodo RX CAN (RP2040)   │                     │
-│  └──────┬──────────────────┘                     │
-│         │                                        │
-│   PWM + DIR + pin FLT                           │
-│         │                                        │
-│  ┌──────▼──────────────────┐                     │
-│  │  Actuador Lineal         │                    │
-│  │  Pololu Glideforce LD    │◄── Feedback ADC    │
-│  │  12 kgf · 12 V · 6 in   │                    │
-│  └──────────────────────────┘                    │
-└──────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────┐
+│                     AMR1 — Sistema Completo              │
+│                                                          │
+│  PC / ROS   ──UART 115200──►  Feather RP2040 CAN (TX)   │
+│                                      │                   │
+│                               Bus CAN 500 kbps           │
+│                                      │                   │
+│                         ┌────────────▼──────────────┐    │
+│                         │  Feather RP2040 CAN (RX)  │    │
+│                         │  + SSD1306 OLED 128×64    │    │
+│                         └────────────┬──────────────┘    │
+│                                      │                   │
+│              ┌───────────────────────┼──────────────┐    │
+│              │                       │              │    │
+│         PWM+DIR                  PWM+DIR        I²C │    │
+│              │                       │              │    │
+│      ┌───────▼──────┐       ┌────────▼──────┐  ┌───▼──┐ │
+│      │  Motor Drive  │       │ Actuador Lin. │  │ OLED │ │
+│      │  MY1016Z3     │       │ Pololu 12kgf  │  │ 128x │ │
+│      │  Tracción     │       │ ◄── ADC pos.  │  │  64  │ │
+│      └───────────────┘       └───────────────┘  └──────┘ │
+└─────────────────────────────────────────────────────────┘
 ```
 
 ---
@@ -189,20 +173,26 @@
 
 ```
 amr1-tec-core/
+├── AMR1_CAD/                    # Diseño CAD completo del robot
+│   ├── amr1.SLDASM              # Ensamble principal SolidWorks
+│   ├── amr1.STEP                # Export universal STEP
+│   ├── amr1.glb                 # Modelo 3D optimizado para visor WebGL
+│   └── *.SLDPRT                 # Piezas individuales del chasis
 ├── PCB_Design/
 │   ├── PCB_AMR_Gerber/          # Gerbers validados — listos para fabricación
 │   └── PCB_AMR_Gerber.zip       # ZIP directo para JLCPCB o PCBWay
 ├── 3D_Models/
 │   └── PCB_3D/
-│       ├── PCB_Final.glb        # Modelo 3D optimizado para el visor WebGL
-│       └── OBJ_PCB_Final.obj    # Export OBJ crudo desde EasyEDA
+│       └── PCB_Final.glb        # Modelo 3D de la PCB para el visor WebGL
 ├── feather_can_tx/              # Firmware: Transmisor Serial → CAN
 ├── feather_can_rx/              # Firmware: Receptor CAN + control de actuadores
 ├── Diseño_CAJA/                 # Modelos STL de la carcasa protectora
 └── docs/hardware/
     ├── ibom_final.html          # Mapa interactivo de componentes (iBOM)
-    └── 3d_viewer/
-        └── index.html           # Visor WebGL 3D auto-contenido
+    ├── 3d_viewer/
+    │   └── index.html           # Visor WebGL 3D de la PCB (auto-contenido)
+    └── amr1_viewer/
+        └── index.html           # Visor WebGL 3D del Robot AMR1 (auto-contenido)
 ```
 
 ---
@@ -220,7 +210,7 @@ Los archivos Gerber están validados y listos para ordenar directamente.
 <div align="center">
 <br/>
 
-Diseñado por el **AMR Autonomy and Research Lab** · Tecnológico de Monterrey
+Desarrollado por el **AMR Autonomy and Research Lab** · Tecnológico de Monterrey
 
 [![Licencia MIT](https://img.shields.io/badge/Licencia-MIT-00f0ff?style=flat-square)](LICENSE)
 
