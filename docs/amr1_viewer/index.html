@@ -4781,8 +4781,8 @@ ground.rotation.x=-Math.PI/2;ground.receiveShadow=true;scene.add(ground);
 var grid=new THREE.GridHelper(400,40,0x003344,0x001a22);
 grid.material.transparent=true;grid.material.opacity=0.4;scene.add(grid);
 var SOURCES=[
-    {label:'jsDelivr CDN',url:'https://cdn.jsdelivr.net/gh/AMR-Autonomy-and-Research-Lab/amr1-tec-core@main/AMR1_CAD/amr1.glb'},
-    {label:'GitHub Raw',url:'https://raw.githubusercontent.com/AMR-Autonomy-and-Research-Lab/amr1-tec-core/main/AMR1_CAD/amr1.glb'}
+    {label:'GitHub Raw',url:'https://raw.githubusercontent.com/AMR-Autonomy-and-Research-Lab/amr1-tec-core/main/AMR1_CAD/amr1.glb'},
+    {label:'jsDelivr CDN',url:'https://cdn.jsdelivr.net/gh/AMR-Autonomy-and-Research-Lab/amr1-tec-core@main/AMR1_CAD/amr1.glb'}
 ];
 var curSrc=0;
 function tryNext(){
@@ -4794,7 +4794,7 @@ function tryNext(){
     setStatus('Conectando a '+src.label,src.url);setProgress(0,'Conectando...');
     console.log('[3D Viewer] Trying:',src.url);
     var xhr=new XMLHttpRequest();
-    xhr.open('GET',src.url,true);xhr.responseType='arraybuffer';xhr.timeout=90000;
+    xhr.open('GET',src.url,true);xhr.responseType='arraybuffer';xhr.timeout=120000;
     xhr.onprogress=function(e){
         if(e.lengthComputable){
             var pct=Math.round(e.loaded/e.total*100),mb=(e.loaded/1048576).toFixed(1),tot=(e.total/1048576).toFixed(1);
@@ -4835,7 +4835,7 @@ function parseModel(buf){
             else{m.roughness=0.5;m.metalness=0.1;}
             m.needsUpdate=true;
         });
-        model.rotation.x=-Math.PI/2;scene.add(model);
+        scene.add(model);
         var box=new THREE.Box3().setFromObject(model);
         var center=box.getCenter(new THREE.Vector3());
         var size=box.getSize(new THREE.Vector3());
