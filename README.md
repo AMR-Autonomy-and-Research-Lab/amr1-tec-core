@@ -19,7 +19,12 @@ Hemos superado los diagramas estáticos tradicionales. Puedes explorar cada comp
   <a href="https://htmlpreview.github.io/?https://raw.githubusercontent.com/AMR-Autonomy-and-Research-Lab/amr1-tec-core/main/docs/hardware/ibom_final.html">
     <img src="https://img.shields.io/badge/⚡_Abrir_Mapa_Interactivo_de_la_Placa_PCB-VER_AHORA-00f0ff?style=for-the-badge&logo=github" alt="Abrir Mapa Interactivo" />
   </a>
-  <p><small>(Visor interactivo online de iBom — Directamente en tu navegador)</small></p>
+  &nbsp;&nbsp;&nbsp;
+  <a href="https://htmlpreview.github.io/?https://raw.githubusercontent.com/AMR-Autonomy-and-Research-Lab/amr1-tec-core/main/docs/hardware/3d_viewer/index.html">
+    <img src="https://img.shields.io/badge/📦_Abrir_Visor_Espacial_3D_de_Geometría-ROTAR_AHORA-ff0055?style=for-the-badge&logo=threedotjs" alt="Abrir Visor 3D" />
+  </a>
+  <br /><br />
+  <p><small>(Visores interactivos online creados desde cero — Renderizado directo en tu navegador)</small></p>
   <br />
 </div>
 
