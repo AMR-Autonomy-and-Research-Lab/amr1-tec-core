@@ -1,0 +1,24 @@
+Improvements:
+
+Braking System:
+-Braking System should be on both sides of the car. 
+-Especially in the front (70% of braking power).
+-Braking zylinder should have a housing. 
+-Only the brake line should be outside of it.
+-The braking system should be redundant.
+
+Steering System:
+-Steering should be a fixed system. 
+-The chain can get off and the car is without steering afterwards. 
+-If it´s only possible with the chain it should atleast be in a housing.
+-No starting position for the steering. 
+-The system has no information about the steering position.
+
+General safety aspects:
+-No lights or reflectors.
+-No crush zone.
+-No damping system. Big problematic for safety and component wear.
+-Depending on the capacity of the amr and especially the use in hot region, the use of a cooling system
+ for the batteries and the power unit should be considered.
+
+To ensure building the same amr again, the use of rivets or pins is necessary.
